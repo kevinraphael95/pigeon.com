@@ -48,70 +48,17 @@ function finishGate() {
   setTimeout(() => {
     $('gate').hidden = true;
     $('site').hidden = false;
-    renderStats();
     startViewing();
   }, 500);
 }
 
-/* ---------------- Chrono + messages ---------------- */
-let _shownMsg = -1;
-
-function renderTimer() {
-  $('timerTotal').textContent   = fmtDuration(store.totalMs);
-  $('timerSession').textContent = fmtDuration(sessionMs);
-
-  const secs = Math.floor(sessionMs / 1000);
-  for (let i = PIGEON_MESSAGES.length - 1; i >= 0; i--) {
-    if (secs >= PIGEON_MESSAGES[i].at) {
-      if (i !== _shownMsg) { _shownMsg = i; $('pigeonMsg').textContent = PIGEON_MESSAGES[i].text; }
-      break;
-    }
-  }
-}
-
+/* ---------------- Chrono ---------------- */
 setInterval(() => {
-  tickTimer(() => { if (!$('site').hidden) renderTimer(); });
-}, 250);
-
-/* ---------------- Mémoire affichée ---------------- */
-function renderStats() {
-  $('visitCount').textContent = `Visite n°${store.visits}`;
-
-  /* Tests de cette visite */
-  $('statsNow').textContent = doneLabels.length ? doneLabels.join(' + ') : '—';
-
-  /* Total par test */
-  const totals = $('statsTotals');
-  totals.innerHTML = '';
-  Object.keys(TEST_LABELS).forEach(id => {
-    const li = document.createElement('li');
-    li.textContent = `${TEST_LABELS[id]} : ${store.tests[id] || 0} fois`;
-    totals.appendChild(li);
+  tickTimer(() => {
+    if ($('site').hidden) return;
+    $('timer').textContent = `Vous regardez ce pigeon depuis ${fmtDuration(store.totalMs)} au total.`;
   });
-
-  /* Dernières visites (hors la visite en cours) */
-  const hist = $('statsHistory');
-  hist.innerHTML = '';
-  const previous = store.history.slice(0, -1).slice(-5).reverse();
-  if (!previous.length) {
-    const li = document.createElement('li');
-    li.textContent = 'Aucune visite précédente.';
-    hist.appendChild(li);
-  } else {
-    previous.forEach(h => {
-      const li = document.createElement('li');
-      li.textContent = `${fmtDate(h.t)} : ${h.tests.join(' + ') || '—'}`;
-      hist.appendChild(li);
-    });
-  }
-}
-
-$('resetBtn').onclick = () => {
-  if (confirm('Effacer le temps total et la mémoire des tests ?')) {
-    resetStore();
-    location.reload();
-  }
-};
+}, 250);
 
 /* ---------------- Démarrage ---------------- */
 document.addEventListener('DOMContentLoaded', () => runTest(0));

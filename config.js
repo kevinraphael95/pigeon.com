@@ -58,11 +58,3 @@ const WORD_SENTENCES = [
   { words: ['Vérification', 'en', 'cours'],            answer: 'Vérification en cours' },
   { words: ['Sécurité', 'avant', 'tout'],              answer: 'Sécurité avant tout' },
 ];
-
-/* ---- Messages du pigeon, selon le temps passé sur la page (secondes de cette visite) ---- */
-const PIGEON_MESSAGES = [
-  { at: 5,  text: 'Vous regardez toujours.' },
-  { at: 15, text: 'La plupart des gens ferment après 3 secondes.' },
-  { at: 30, text: 'Ce pigeon ne vous regarde pas.' },
-  { at: 60, text: 'Il a l’air de réfléchir à quelque chose.' },
-];
