@@ -168,17 +168,34 @@ body {
 .word-btn  { width: auto; padding: 6px 10px; font-size: 12px; font-family: var(--mono); margin: 0; }
 
 /* ================================================================
-   SITE PIGEON
+   SITE PIGEON — photo plein écran + carré du temps
 ================================================================ */
-#site { display: flex; flex-direction: column; align-items: center; gap: 18px; }
+#site { position: fixed; inset: 0; z-index: 10; background: #1a1a18; }
 
-.pigeon-img {
-  width: 100%; max-width: 520px; height: auto;
-  border-radius: var(--r); border: 1px solid var(--border);
-  display: block; box-shadow: var(--shadow);
+#site .bg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;          /* mets "contain" pour voir tout le pigeon */
+  object-position: center;
 }
 
-.timer { font-size: 14px; color: var(--text2); text-align: center; }
+.timer-card {
+  position: absolute;
+  left: 50%; bottom: 32px;
+  transform: translateX(-50%);
+  width: min(380px, calc(100% - 32px));
+  text-align: center;
+  padding: 18px 16px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: var(--r);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+}
+.timer-card .label { font-size: 12px; color: var(--text2); }
+.timer-card .total { font-size: 30px; font-weight: 500; font-family: var(--mono); margin: 6px 0 4px; letter-spacing: -0.02em; }
+.timer-card .visit { font-size: 11px; font-family: var(--mono); color: var(--text3); }
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }

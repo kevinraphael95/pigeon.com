@@ -56,7 +56,8 @@ function finishGate() {
 setInterval(() => {
   tickTimer(() => {
     if ($('site').hidden) return;
-    $('timer').textContent = `Vous regardez ce pigeon depuis ${fmtDuration(store.totalMs)} au total.`;
+    $('timerTotal').textContent   = fmtDuration(store.totalMs);
+    $('timerSession').textContent = fmtDuration(sessionMs);
   });
 }, 250);
 
