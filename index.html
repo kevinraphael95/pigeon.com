@@ -3,64 +3,78 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>reCAPTCHA — Vérification humaine</title>
+  <title>Photo of a Pigeon</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="glitch-overlay" id="glitchOverlay"></div>
-  <div class="cursor-pulse"   id="cursorPulse"></div>
+  <div class="main">
 
-  <div class="noise" id="noiseEl" aria-hidden="true">
-    <svg xmlns="http://www.w3.org/2000/svg">
-      <filter id="noise-filter">
-        <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
-      </filter>
-      <rect width="100%" height="100%" filter="url(#noise-filter)" opacity="0.04"/>
-    </svg>
-  </div>
-
-  <div class="main" id="mainPanel">
-
-    <div class="brand-bar">
-      <div class="brand-logo"   id="brandLogo">🔒</div>
-      <div class="brand-name"   id="brandName">reCAPTCHA</div>
-      <div class="brand-secure" id="brandSecure">SÉCURISÉ · v3.2.1</div>
-    </div>
-
-    <div class="panel" id="panel">
-
-      <div class="progress-bar">
-        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+    <!-- ============ PORTE : 1 ou 2 tests aléatoires ============ -->
+    <section id="gate">
+      <div class="brand-bar">
+        <div class="brand-logo">🔒</div>
+        <div class="brand-name">reCAPTCHA</div>
+        <div class="brand-secure">SÉCURISÉ · v3.2.1</div>
       </div>
 
-      <div class="panel-head">
-        <div class="panel-title" id="panelTitle">Vérification humaine</div>
-        <div class="panel-sub"   id="panelSub">Complétez le défi de sécurité ci-dessous</div>
+      <div class="panel">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+
+        <div class="panel-head">
+          <div class="panel-title" id="panelTitle">Vérification humaine</div>
+          <div class="panel-sub"   id="panelSub">Complétez le défi de sécurité ci-dessous</div>
+        </div>
+
+        <div class="panel-body" id="panelBody"></div>
+
+        <div class="panel-foot">
+          <div class="foot-icon">🛡️</div>
+          <div class="foot-text">Prouvez que vous pouvez regarder un pigeon.</div>
+          <div class="foot-logo">Google</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SITE : la photo du pigeon ============ -->
+    <section id="site" hidden>
+      <div class="site-title">Photo of a Pigeon</div>
+
+      <img class="pigeon-img" src="pigeon.jpg" alt="Un pigeon biset perché sur un rebord de pierre">
+
+      <div class="site-sub">The definitive pigeon photograph.</div>
+
+      <div class="timer-card">
+        <div class="timer-label">Temps total passé à regarder ce pigeon</div>
+        <div class="timer-total" id="timerTotal">0 s</div>
+        <div class="timer-line">Cette visite : <span id="timerSession">0 s</span> · <span id="visitCount"></span></div>
+        <div class="pigeon-msg" id="pigeonMsg"></div>
       </div>
 
-      <div class="panel-body" id="panelBody"></div>
+      <details class="stats">
+        <summary>Mémoire des tests</summary>
+        <div class="stats-block">
+          <h3>Cette visite</h3>
+          <p id="statsNow">—</p>
+        </div>
+        <div class="stats-block">
+          <h3>Tests réussis au total</h3>
+          <ul id="statsTotals"></ul>
+        </div>
+        <div class="stats-block">
+          <h3>Visites précédentes</h3>
+          <ul id="statsHistory"></ul>
+        </div>
+        <button class="reset-btn" id="resetBtn">Tout effacer</button>
+      </details>
+    </section>
 
-      <div class="stats-bar" id="statsBar">
-        <div class="stat-item"><div class="stat-dot" id="dot1"></div><span id="stat1">trust: 0</span></div>
-        <div class="stat-item"><div class="stat-dot" id="dot2"></div><span id="stat2">bond: 0</span></div>
-        <div class="stat-item"><div class="stat-dot" id="dot3"></div><span id="stat3">état: inactif</span></div>
-      </div>
-
-      <div class="panel-foot">
-        <div class="foot-icon">🛡️</div>
-        <div class="foot-text" id="footText">Protégé par reCAPTCHA — Confidentialité · CGU</div>
-        <div class="foot-logo" id="footLogo">Google</div>
-      </div>
-
-    </div>
   </div>
 
   <script src="config.js"></script>
   <script src="engine.js"></script>
-  <script src="stages.js"></script>
   <script src="main.js"></script>
 
 </body>
