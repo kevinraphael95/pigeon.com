@@ -10,10 +10,19 @@
 </head>
 <body>
 
-  <div class="main">
+  <!-- ============ SITE : photo plein écran (floutée tant que le captcha n'est pas passé) ============ -->
+  <main id="site">
+    <img class="bg" src="pigeon.jpg" alt="Un pigeon biset perché sur un rebord de pierre">
+    <div class="timer-card">
+      <div class="label">Temps total passé à regarder ce pigeon</div>
+      <div class="total" id="timerTotal">0 s</div>
+      <div class="visit">Cette visite : <span id="timerSession">0 s</span></div>
+    </div>
+  </main>
 
-    <!-- ============ PORTE : 1 ou 2 tests aléatoires ============ -->
-    <section id="gate">
+  <!-- ============ POPUP CAPTCHA : 1 ou 2 tests aléatoires ============ -->
+  <div id="gate" role="dialog" aria-modal="true" aria-label="Vérification humaine">
+    <div class="gate-box">
       <div class="brand-bar">
         <div class="brand-logo">🔒</div>
         <div class="brand-name">reCAPTCHA</div>
@@ -36,18 +45,7 @@
           <div class="foot-logo">Google</div>
         </div>
       </div>
-    </section>
-
-    <!-- ============ SITE : la photo du pigeon ============ -->
-    <section id="site" hidden>
-      <img class="bg" src="pigeon.jpg" alt="Un pigeon biset perché sur un rebord de pierre">
-      <div class="timer-card">
-        <div class="label">Temps total passé à regarder ce pigeon</div>
-        <div class="total" id="timerTotal">0 s</div>
-        <div class="visit">Cette visite : <span id="timerSession">0 s</span></div>
-      </div>
-    </section>
-
+    </div>
   </div>
 
   <script src="config.js"></script>

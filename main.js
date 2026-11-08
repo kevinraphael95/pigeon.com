@@ -46,8 +46,9 @@ function finishGate() {
   saveStore();
 
   setTimeout(() => {
-    $('gate').hidden = true;
-    $('site').hidden = false;
+    $('site').classList.add('unlocked');     /* défloute la photo */
+    $('gate').classList.add('closing');      /* ferme la popup */
+    setTimeout(() => { $('gate').hidden = true; }, 700);
     startViewing();
   }, 500);
 }
@@ -55,7 +56,7 @@ function finishGate() {
 /* ---------------- Chrono ---------------- */
 setInterval(() => {
   tickTimer(() => {
-    if ($('site').hidden) return;
+    if (!$('site').classList.contains('unlocked')) return;
     $('timerTotal').textContent   = fmtDuration(store.totalMs);
     $('timerSession').textContent = fmtDuration(sessionMs);
   });
