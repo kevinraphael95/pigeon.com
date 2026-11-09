@@ -49,15 +49,19 @@ function finishGate() {
     $('site').classList.add('unlocked');     /* défloute la photo */
     $('gate').classList.add('closing');      /* ferme la popup */
     setTimeout(() => { $('gate').hidden = true; }, 700);
+    baseMs = Math.floor(store.totalMs / 1000) * 1000;   /* départ du total, aligné sur la seconde */
     startViewing();
   }, 500);
 }
 
 /* ---------------- Chrono ---------------- */
+/* Total affiché = total d'avant + temps de la visite : les deux changent à la même milliseconde */
+let baseMs = 0;
+
 setInterval(() => {
   tickTimer(() => {
     if (!$('site').classList.contains('unlocked')) return;
-    $('timerTotal').textContent   = fmtDuration(store.totalMs);
+    $('timerTotal').textContent   = fmtDuration(baseMs + sessionMs);
     $('timerSession').textContent = fmtDuration(sessionMs);
   });
 }, 250);
