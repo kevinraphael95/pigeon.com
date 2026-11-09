@@ -184,13 +184,23 @@ body {
 ================================================================ */
 #site { position: fixed; inset: 0; z-index: 1; background: #1a1a18; overflow: hidden; }
 
+/* Fond : la même photo, recadrée et floutée, pour remplir les bandes vides */
+#site .bg-fill {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: blur(30px) brightness(0.8);
+  transform: scale(1.15);
+}
+
+/* Photo entière visible, adaptée à l'écran */
 #site .bg {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
-  object-fit: cover;          /* mets "contain" pour voir tout le pigeon */
+  object-fit: contain;
   object-position: center;
   filter: blur(22px);
-  transform: scale(1.1);      /* cache les bords nets du flou */
+  transform: scale(1.05);
   transition: filter 1.2s ease, transform 1.2s ease;
 }
 #site.unlocked .bg { filter: none; transform: none; }
