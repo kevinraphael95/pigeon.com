@@ -66,5 +66,35 @@ setInterval(() => {
   });
 }, 250);
 
+/* ---------------- Blague : clic droit sur le pigeon ---------------- */
+const JOKE_TEXT = 'You wouldn’t copy paste a pigeon.';
+let _jokeTimer = null;
+
+function showJoke(x, y) {
+  let box = document.getElementById('jokeBox');
+  if (!box) {
+    box = document.createElement('div');
+    box.id = 'jokeBox';
+    document.body.appendChild(box);
+  }
+  box.textContent = JOKE_TEXT;
+
+  /* Placé près du curseur, sans sortir de l'écran */
+  box.style.left = Math.min(x, window.innerWidth  - 280) + 'px';
+  box.style.top  = Math.min(y, window.innerHeight - 60)  + 'px';
+
+  box.classList.remove('show');
+  void box.offsetWidth;            /* relance la transition */
+  box.classList.add('show');
+
+  clearTimeout(_jokeTimer);
+  _jokeTimer = setTimeout(() => box.classList.remove('show'), 2200);
+}
+
+document.querySelectorAll('#site img').forEach(img => {
+  img.addEventListener('contextmenu', e => { e.preventDefault(); showJoke(e.clientX, e.clientY); });
+  img.addEventListener('dragstart',   e => e.preventDefault());
+});
+
 /* ---------------- Démarrage ---------------- */
 document.addEventListener('DOMContentLoaded', () => runTest(0));
