@@ -91,7 +91,7 @@ function showJoke(x, y) {
   _jokeTimer = setTimeout(() => box.classList.remove('show'), 2200);
 }
 
-document.querySelectorAll('#site img').forEach(img => {
+document.querySelectorAll('#site .frame').forEach(img => {
   img.addEventListener('contextmenu', e => { e.preventDefault(); showJoke(e.clientX, e.clientY); });
   img.addEventListener('dragstart',   e => e.preventDefault());
 });
